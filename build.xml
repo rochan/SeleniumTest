@@ -1,0 +1,38 @@
+<?xml version="1.0" ?> 
+<project name="Ant Example" default="execute">
+
+	<target name="init" depends="clean">
+		<mkdir dir="bin" />
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="src" destdir="bin" classpath=".\lib\junit4.5.jar:.\lib\junit4.5-src.jar:.\lib\junit-dep-4.5.jar:.\lib\selenium-java-2.37.0.jar:.\lib\selenium-server-standalone-2.37.0.jar" />
+	</target>
+	
+	<target name="test" depends="compile">
+	    <junit printsummary="on">
+	    	<classpath>
+	    		<pathelement location=".\lib\junit4.5.jar"/>
+	    		<pathelement location=".\lib\selenium-java-2.37.0.jar"/>
+	    		<pathelement location=".\lib\selenium-server-standalone-2.37.0.jar"/>
+	    		<pathelement location="bin"/>
+	    	</classpath>
+	      <formatter type="brief" usefile="false" />
+	      <test name="com.test.TestLoginPage_Chrome" />
+	      <test name="com.test.TestVideoAddPage_Chrome" />
+	      <test name="com.test.TestLoginPage_FireFox" />
+	      <test name="com.test.TestVideoAddPage_FireFox" />
+	      
+	      
+	    </junit>
+	  </target>
+	
+	<target name="execute" depends="test">
+		
+	</target>
+
+	<target name="clean">
+		<delete dir="bin/com" />
+	</target>
+	
+</project>
